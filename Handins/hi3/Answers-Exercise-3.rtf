@@ -1,0 +1,420 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\csgray\c0;\csgray\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11540\viewh8620\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Exercises Week 39\
+3.1.1\
+\
+In Mark1 the wall-clock time is 0.1 ns. every time i tested, however my computer measured the test to more then 2.5 times that. This could be ascribed to the fact that Mark1 has no return statement, the compiler realises that the result from multiply is never used and it eliminates the code.\
+In Mark2 we return the result and the time jumps to about 31.1 ns. which makes sense. \
+In Mark3 we run multiply 10 times and variation in time can be seen, but seems rather steady though. Mark4 we can get a mean time, that I have measured to the same every time, and a standard deviation that is also pretty steady.\
+Mark5 has a few interesting peaks, which could suggest that another program has affected. The mean evens out at a steady 
+\fs22 \cf2 \cb3 \CocoaLigature0 22,9 ns and the side approaches 0, which is most likely due to the data and computation being performed at cache level.  
+\fs24 \cf0 \cb1 \CocoaLigature1  \
+Mark6 by using the IntToDoubleFunction allows the method to take a function such as an lambda expression and return an double. In this case we just take the multiply method. Sees the same pattern as in mark5.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 macOS High Sierra\
+Version 10.13.6 (17G65)\
+Processor \cf2 \cb1 \CocoaLigature1 2,6 GHz Intel Core i5\
+Memory 8 GB 1600 MHz DDR3\
+Graphics Intel Iris 1536 MB
+\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 $ java Benchmark\
+# OS:   Mac OS X; 10.13.6; x86_64\
+# JVM:  Oracle Corporation; 9.0.1\
+# CPU:  null; 4 "cores"\
+# Date: 2018-10-16T17:07:20+0200\
+\
+Mark1\
+0,1 ns\
+\
+real	0m0.278s\
+user	0m0.322s\
+sys	0m0.052s\
+\
+Mark2\
+ 29,1 ns\
+\
+real	0m3.177s\
+user	0m3.229s\
+sys	0m0.062s\
+\
+Mark3\
+  29,1 ns\
+  33,2 ns\
+  33,2 ns\
+  33,2 ns\
+  33,4 ns\
+  33,2 ns\
+  33,3 ns\
+  33,2 ns\
+  33,2 ns\
+  33,2 ns\
+\
+real	0m33.093s\
+user	0m33.116s\
+sys	0m0.088s\
+//I ran it 8 times, two of them i timed it as seen above, and it the time java Benchmark operation did not affect the measurements.   \
+\
+Mark4\
+24,1 ns +/-  0,516\
+24,1 ns +/-  0,541\
+24,1 ns +/-  0,516\
+\
+Mark5\
+ 475,7 ns +/-   842,55          2\
+ 173,7 ns +/-   113,22          4\
+ 231,4 ns +/-   107,90          8\
+ 229,9 ns +/-   225,44         16\
+  55,2 ns +/-     7,10         32\
+  71,1 ns +/-    37,29         64\
+ 102,5 ns +/-    99,34        128\
+  53,2 ns +/-    16,74        256\
+  40,7 ns +/-     6,91        512\
+  39,0 ns +/-     4,18       1024\
+  40,3 ns +/-     6,09       2048\
+  39,5 ns +/-     5,42       4096\
+  35,5 ns +/-     1,82       8192\
+  34,3 ns +/-     0,14      16384\
+  34,1 ns +/-     3,30      32768\
+  36,8 ns +/-     5,56      65536\
+  24,9 ns +/-     4,00     131072\
+  23,2 ns +/-     0,75     262144\
+  22,8 ns +/-     0,48     524288\
+  22,6 ns +/-     0,34    1048576\
+  22,7 ns +/-     0,18    2097152\
+  22,9 ns +/-     0,09    4194304\
+  22,9 ns +/-     0,18    8388608\
+  22,9 ns +/-     0,17   16777216\
+\
+Mark6\
+\
+multiply                            649,1 ns    1200,71          2\
+multiply                            372,6 ns     155,44          4\
+multiply                            241,6 ns      86,21          8\
+multiply                            359,0 ns     228,89         16\
+multiply                            302,5 ns     170,72         32\
+multiply                             80,6 ns      38,73         64\
+multiply                            121,1 ns     133,22        128\
+multiply                             62,8 ns      16,67        256\
+multiply                             73,0 ns       7,03        512\
+multiply                             50,0 ns      12,59       1024\
+multiply                             46,3 ns       6,60       2048\
+multiply                             45,7 ns       5,15       4096\
+multiply                             63,0 ns      66,54       8192\
+multiply                             35,3 ns       1,38      16384\
+multiply                             42,2 ns      17,89      32768\
+multiply                             27,7 ns       5,09      65536\
+multiply                             31,9 ns       5,97     131072\
+multiply                             25,6 ns       0,91     262144\
+multiply                             25,3 ns       0,44     524288\
+multiply                             25,5 ns       0,42    1048576\
+multiply                             25,6 ns       0,26    2097152\
+multiply                             25,7 ns       0,40    4194304\
+multiply                             25,6 ns       0,25    8388608\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \CocoaLigature1 3.1.2\
+The different kinds of operations seems to have very different mean times.This can be attributed to the JIT compiler. compiling the lambda expressions to machine code, on usage. This measurements are quite faster then the ones in Microbenchmarks, which I will contribute to the better performing hardware and software since its publication.\
+  \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 $ java Benchmark\
+# OS:   Mac OS X; 10.13.6; x86_64\
+# JVM:  Oracle Corporation; 10.0.2\
+# CPU:  null; 4 "cores"\
+# Date: 2018-10-16T20:52:27+0200\
+pow                                  25,1 ns       0,17   16777216\
+exp                                  24,9 ns       1,02   16777216\
+log                                  15,6 ns       0,56   16777216\
+sin                                  18,6 ns       0,11   16777216\
+cos                                  18,8 ns       0,13   16777216\
+tan                                  26,1 ns       0,78   16777216\
+asin                                267,4 ns       1,06    1048576\
+acos                                263,7 ns       6,93    1048576\
+atan                                 55,4 ns       1,36    8388608\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \CocoaLigature1 3.2.1\
+In the Mark6 example we see large deviations in the wall-clock time, i.e. the time it takes to do the individual operations for the CPU. Al methods has sort of same pattern with a stabilisation of time consumption the longer the method runs and a deviation that approaches 0. However there are peaks in pretty much all of them, and especially \'93Thread Create\'94, \'93
+\fs22 \cf2 \cb3 \CocoaLigature0 Thread create start\'94, and \'93Thread create start join\'94 is harder to determine as there are fewer outputs to look at. \
+\
+
+\fs24 \cf0 \cb1 \CocoaLigature1 3.2.2\
+Yes these are indeed plausible. The only surprise I have identified is the \'93
+\fs22 \cf2 \cb3 \CocoaLigature0 Thread create start join\'94 that has a mean that is lower then what it stabilised at in the previous test. 
+\fs24 \cf0 \cb1 \CocoaLigature1   \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 $ java TestTimeThreads\
+# OS:   Mac OS X; 10.13.6; x86_64\
+# JVM:  Oracle Corporation; 10.0.2\
+# CPU:  null; 4 "cores"\
+# Date: 2018-10-16T21:29:29+0200\
+hashCode()                            3,0 ns       0,03  134217728\
+Point creation                      182,4 ns       7,41    2097152\
+Thread's work                      6326,8 ns     185,37      65536\
+Thread create                      1434,5 ns     111,66     262144\
+Thread create start               74544,9 ns     667,58       4096\
+Thread create start join          93353,8 ns    2273,34       4096\
+ai value = 1474500000\
+Uncontended lock                      5,9 ns       0,06   67108864\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \CocoaLigature1 3.3.1\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 $ java TestCountPrimesThreads\
+# OS:   Mac OS X; 10.13.6; x86_64\
+# JVM:  Oracle Corporation; 10.0.2\
+# CPU:  null; 4 "cores"\
+# Date: 2018-10-16T22:52:28+0200\
+countSequential                    9619,6 us     122,77         32\
+countParallelN      1             10373,8 us     533,85         32\
+countParallelNLocal      1         12401,2 us      98,39         32\
+countParallelN      2              6362,2 us      86,99         64\
+countParallelNLocal      2          7834,8 us     160,96         32\
+countParallelN      3              6816,4 us     247,88         64\
+countParallelNLocal      3          6024,3 us     574,64         64\
+countParallelN      4              6809,3 us     938,06         64\
+countParallelNLocal      4          6514,8 us    1225,89         64\
+countParallelN      5              7679,5 us     983,70         32\
+countParallelNLocal      5          6346,0 us     609,80         64\
+countParallelN      6              7583,5 us    1736,30         32\
+countParallelNLocal      6          8409,6 us    1768,33         64\
+countParallelN      7              7688,8 us    1091,56         64\
+countParallelNLocal      7          5799,8 us     179,19         64\
+countParallelN      8              6054,2 us      81,89         64\
+countParallelNLocal      8          6072,8 us    1060,35         64\
+countParallelN      9              7275,6 us    1329,27         64\
+countParallelNLocal      9          6226,4 us     388,74         64\
+countParallelN     10              6848,9 us     530,66         64\
+countParallelNLocal     10          5926,3 us     491,77         64\
+countParallelN     11              7708,2 us    2349,54         64\
+countParallelNLocal     11          6476,6 us     804,88         64\
+countParallelN     12              6238,8 us     295,30         64\
+countParallelNLocal     12          6406,2 us    1450,57         64\
+countParallelN     13              6310,8 us     323,26         64\
+countParallelNLocal     13          7466,2 us    1572,18         32\
+countParallelN     14              8188,3 us    1903,13         32\
+countParallelNLocal     14          6421,6 us    1034,49         64\
+countParallelN     15              6541,2 us     354,99         64\
+countParallelNLocal     15          6195,8 us     812,59         64\
+countParallelN     16              6835,7 us     534,32         64\
+countParallelNLocal     16          6378,5 us     780,17         64\
+countParallelN     17              6717,3 us     635,32         32\
+countParallelNLocal     17          5789,3 us     156,02         64\
+countParallelN     18              7549,9 us    1670,33         64\
+countParallelNLocal     18          6847,8 us    1628,61         64\
+countParallelN     19              9163,0 us    3324,56         32\
+countParallelNLocal     19          6558,7 us     311,77         64\
+countParallelN     20              8186,5 us    2081,38         32\
+countParallelNLocal     20          7080,5 us    1603,08         64\
+countParallelN     21              8211,9 us    2804,53         64\
+countParallelNLocal     21          7700,5 us    3502,74         16\
+countParallelN     22              7531,9 us     921,26         64\
+countParallelNLocal     22          7386,8 us    1961,98         64\
+countParallelN     23              8000,2 us    1027,07         64\
+countParallelNLocal     23          5829,5 us     113,96         64\
+countParallelN     24              6278,8 us      85,41         64\
+countParallelNLocal     24          7241,3 us    1160,94         64\
+countParallelN     25              6486,3 us     741,69         64\
+countParallelNLocal     25          7202,1 us    1048,83         64\
+countParallelN     26              6620,3 us     222,96         64\
+countParallelNLocal     26          6073,2 us     181,93         64\
+countParallelN     27              6492,4 us     160,70         64\
+countParallelNLocal     27          6983,2 us     288,23         64\
+countParallelN     28              8220,2 us    2672,27         64\
+countParallelNLocal     28          9171,4 us    2913,99         64\
+countParallelN     29              7644,6 us    2413,88         32\
+countParallelNLocal     29          7482,8 us     839,40         32\
+countParallelN     30              7762,3 us     914,29         64\
+countParallelNLocal     30          6346,6 us     750,96         64\
+countParallelN     31              9600,0 us    3957,70         16\
+countParallelNLocal     31          9660,1 us    2349,81         64\
+countParallelN     32              8630,8 us    1873,33         32\
+countParallelNLocal     32          9829,1 us    4740,48         32\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \CocoaLigature1 3.3.2\
+See Scatter-chart1.png in zip.\
+\
+3.3.3\
+The results seems plausible. On the graph it that the best performance is achieved with 3-4 threads. Around 8 threads there is a small gain for countParallelNlocal but likewise worse performance for the countParallelN. There are only 4 cores in this computer and it therefore makes sense that the best performance is around 4 threads in the benchmark.\
+\
+3.3.3\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 $ java TestCountPrimesThreads\
+# OS:   Mac OS X; 10.13.6; x86_64\
+# JVM:  Oracle Corporation; 10.0.2\
+# CPU:  null; 4 "cores"\
+# Date: 2018-10-17T00:25:02+0200\
+countSequential                   12266,5 us     467,27         32\
+countParallelN      1             12460,0 us     180,18         32\
+countParallelNLocal      1         12476,6 us     337,02         32\
+countParallelN      2              8187,4 us     145,61         32\
+countParallelNLocal      2          8038,7 us     125,58         32\
+countParallelN      3              7066,4 us     466,65         32\
+countParallelNLocal      3          6920,7 us     259,42         64\
+countParallelN      4              6539,5 us     858,91         64\
+countParallelNLocal      4          6802,9 us     702,30         64\
+countParallelN      5              6777,4 us     115,14         64\
+countParallelNLocal      5          6901,8 us     102,65         64\
+countParallelN      6              6493,1 us     130,66         64\
+countParallelNLocal      6          6649,0 us     156,38         64\
+countParallelN      7              6497,3 us     218,31         64\
+countParallelNLocal      7          6342,0 us     118,97         64\
+countParallelN      8              6156,2 us      58,12         64\
+countParallelNLocal      8          6266,4 us     101,72         64\
+countParallelN      9              6476,0 us     109,88         64\
+countParallelNLocal      9          6266,4 us      96,24         64\
+countParallelN     10              6321,2 us      64,06         64\
+countParallelNLocal     10          6821,7 us     364,33         64\
+countParallelN     11              6337,0 us     132,88         64\
+countParallelNLocal     11          6166,2 us     115,61         64\
+countParallelN     12              6222,6 us      73,53         64\
+countParallelNLocal     12          6175,4 us     329,73         64\
+countParallelN     13              6190,5 us      84,17         64\
+countParallelNLocal     13          6236,2 us      99,45         64\
+countParallelN     14              6122,0 us      41,78         64\
+countParallelNLocal     14          6528,4 us     444,55         64\
+countParallelN     15              6277,7 us      90,78         64\
+countParallelNLocal     15          6183,6 us      84,90         64\
+countParallelN     16              6429,7 us     171,33         64\
+countParallelNLocal     16          6346,7 us     173,67         64\
+countParallelN     17              6204,7 us      30,72         64\
+countParallelNLocal     17          6256,0 us     139,61         64\
+countParallelN     18              6293,1 us      81,71         64\
+countParallelNLocal     18          6582,1 us     172,89         64\
+countParallelN     19              6308,8 us     171,34         64\
+countParallelNLocal     19          6364,4 us     155,48         64\
+countParallelN     20              6372,3 us     144,10         64\
+countParallelNLocal     20          6253,6 us     107,50         64\
+countParallelN     21              6285,2 us      53,57         64\
+countParallelNLocal     21          6330,4 us      96,17         64\
+countParallelN     22              6470,4 us     329,91         64\
+countParallelNLocal     22          7334,2 us    1983,89         32\
+countParallelN     23              6365,3 us      52,61         64\
+countParallelNLocal     23          6384,8 us     109,11         64\
+countParallelN     24              6331,0 us     124,25         64\
+countParallelNLocal     24          6432,2 us      83,40         64\
+countParallelN     25              7899,9 us    1444,97         64\
+countParallelNLocal     25          7320,1 us    1176,15         64\
+countParallelN     26              6583,7 us     124,32         64\
+countParallelNLocal     26          7227,1 us     985,21         64\
+countParallelN     27              6678,4 us     230,12         64\
+countParallelNLocal     27          6622,2 us     105,63         64\
+countParallelN     28              7487,0 us     804,52         64\
+countParallelNLocal     28          6687,2 us      78,10         64\
+countParallelN     29              6816,4 us     250,42         64\
+countParallelNLocal     29          6873,5 us     148,87         64\
+countParallelN     30              6732,0 us     176,54         64\
+countParallelNLocal     30          6781,0 us     163,53         64\
+countParallelN     31              6949,3 us     480,26         64\
+countParallelNLocal     31          6739,2 us     218,22         64\
+countParallelN     32              6902,6 us     280,02         64\
+countParallelNLocal     32          6679,3 us     102,93         64
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+The AtomicLong performance around 20% worse then the LongCounter class on the first few threads, but then at thread 4 it reaches better performance and stabilises at around 6200 us and ends at a stabile level around 6600 us from thread 20-32. An overall improvement in performance at around 20% after thread number 4. Often the build in classes and methods are very good and I will in general advocate for their use when more complex operations has to be made, meaning operations with many threads, which this test also shows very well. So overall it comes down to use case.\
+\
+4.3.5\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf2 \cb3 \CocoaLigature0 $ java TestCountPrimesThreads\
+# OS:   Mac OS X; 10.13.6; x86_64\
+# JVM:  Oracle Corporation; 10.0.2\
+# CPU:  null; 4 "cores"\
+# Date: 2018-10-17T00:54:11+0200\
+countSequential                    9374,8 us      56,24         32\
+countParallelN      1             10066,9 us     108,44         32\
+countParallelN      2              5993,2 us      41,89         64\
+countParallelN      3              6517,7 us     404,33         64\
+countParallelN      4              5569,7 us      31,93         64\
+countParallelN      5              6184,8 us      52,95         64\
+countParallelN      6              5943,6 us      29,08         64\
+countParallelN      7              5872,4 us      65,70         64\
+countParallelN      8              5725,7 us      57,21         64\
+countParallelN      9              5938,5 us      34,52         64\
+countParallelN     10              5899,1 us      51,79         64\
+countParallelN     11              6035,0 us     270,37         64\
+countParallelN     12              6075,9 us     334,27         64\
+countParallelN     13              5939,7 us      68,73         64\
+countParallelN     14              5944,4 us      67,82         64\
+countParallelN     15              6489,7 us     266,39         64\
+countParallelN     16              6293,5 us     538,12         64\
+countParallelN     17              6082,1 us     148,74         64\
+countParallelN     18              6245,4 us      82,42         64\
+countParallelN     19              6145,9 us      98,68         64\
+countParallelN     20              6429,8 us     304,19         64\
+countParallelN     21              6221,2 us     115,61         64\
+countParallelN     22              6246,1 us     118,41         64\
+countParallelN     23              6130,8 us     125,41         64\
+countParallelN     24              6156,9 us     165,40         64\
+countParallelN     25              6364,0 us     203,06         64\
+countParallelN     26              6249,5 us      83,80         64\
+countParallelN     27              6433,0 us     253,13         64\
+countParallelN     28              6210,1 us     127,94         64\
+countParallelN     29              6374,3 us      79,11         64\
+countParallelN     30              6537,1 us     265,41         64\
+countParallelN     31              6574,2 us     473,34         64\
+countParallelN     32              6414,8 us     161,85         64\
+\
+This scheme is quite a lot faster on my computer. At any thread count this performance better with around 10-15% in the first 10 threads and around 5% when it stabilises around 6300. Seems to even out with the old implementation at around 30 threads through.\
+\
+4.4.1\
+Memoizer1 execution time:\
+mean \uc0\u956 s: 1,891,870\
+sdev: 39,813\
+\
+4.4.2\
+Memoizer2 execution time:\
+mean \uc0\u956 s: 1,145,997\
+sdev: 22,134\
+\
+4.4.3\
+Memoizer3 execution time:\
+mean \uc0\u956 s: 920,836\
+sdev: 50,690\
+\
+\
+\
+4.4.4\
+Memoizer4 execution time:\
+mean \uc0\u956 s: 913,431\
+sdev: 49,644\
+\
+4.4.5\
+Memoizer5 execution time:\
+mean \uc0\u956 s: 912,875\
+sdev: 60,782\
+\
+4.4.6\
+Memoizer0 execution time:\
+mean \uc0\u956 s: 963,551\
+sdev: 54,257\
+\
+4.4.7\
+When factorizing relatively large numbers, we see from the results that the cache which utilizes Future performs better compared to the one that does not utilize it. Yes, it largely agrees with the lecture\'92s and Goetz\'92s development of the cache classes.\
+\
+4.4.8\
+We could perform an experiment where we execute the program on a Raspberry Pi to see how the performance would be on a relatively slow machine. Then we could experiment with the size of the cache.
+\fs24 \cf0 \cb1 \CocoaLigature1 \
+}
